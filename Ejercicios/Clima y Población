@@ -1,1 +1,23 @@
+pipeline {
+    agent any
 
+    stages {
+        stage('Clima Actual') {
+            steps {
+                script {
+                    def temperatura = 25 
+                   echo "El clima actual en Bilbao es de ${temperatura}°C."
+                }
+            }
+        }
+
+        stage('Obtener Población') {
+            steps {
+                script {
+                    def poblacion = 345122 // Población aproximada de Bilbao
+                    echo "La población actual de Bilbao es de ${poblacion} habitantes."
+                }
+            }
+        }
+    }
+}
