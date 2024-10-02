@@ -1,1 +1,46 @@
+/*
+EJERCICIO MODELO DE EXAMEN N° 1:
+Desarrolle un pipeline que informe lo siguiente en base a los días de la semana
+Si el día es lunes informe los siguientes calculos matemáticos de 2 numeros: Suma, Resta, Multiplicación, Division
+Si el día es Martes informe el usuario que realizo la ejecución con la fecha actual 
+Si el día es Miércoles generar un mensaje por consola que informe que se ejecuto el pipeline
+Si el día es jueves informar el clima actual en su ciudad (prestablecido en el código)
+Si el día es Viernes generar siguiente mensaje de consola "Lo estas haciendo de maravilas!"
+*/
 
+pipeline {
+    agent any
+
+    stages {
+        stage('Ejecutar según el día') {
+            steps {
+                script {
+                    def dayOfWeek = new Date().format('u') 
+
+                    switch (dayOfWeek) {
+                        case '1': // Lunes
+                            def num1 = 10
+                            def num2 = 5
+                            echo "Suma: ${num1 + num2}"
+                            echo "Resta: ${num1 - num2}"
+                            echo "Multiplicación: ${num1 * num2}"
+                            echo "División: ${num1 / num2}"
+                            break
+                        case '2': // Martes
+                            echo "Karlinho: ${env.BUILD_USER} - Fecha: ${new Date().format('yyyy-MM-dd')}"
+                            break
+                        case '3': // Miércoles
+                            echo "Se ejecutó el pipeline."
+                            break
+                        case '4': // Jueves
+                            def clima = "Soleado, 25°C"
+                            echo "El clima actual en Bilbao es: ${clima}"
+                            break
+                        case '5': // Viernes
+                            echo "Lo estás haciendo de maravillas!"
+                    }
+                }
+            }
+        }
+    }
+}
